@@ -1,34 +1,13 @@
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  creationTimestamp: "2023-11-27T13:08:21Z"
   name: php-apache
   namespace: zad4
-  resourceVersion: "26005"
-  uid: 6e3b98b7-7da3-4933-be0a-24f4dbfc19d9
 spec:
-  maxReplicas: 10
-  metrics:
-  - resource:
-      name: cpu
-      target:
-        averageUtilization: 50
-        type: Utilization
-    type: Resource
-  minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: php-apache
-status:
-  conditions:
-  - lastTransitionTime: "2023-11-27T13:08:37Z"
-    message: 'the HPA controller was unable to get the target''s current scale: deployments/scale.apps
-      "php-apache" not found'
-    reason: FailedGetScale
-    status: "False"
-    type: AbleToScale
-  currentMetrics: null
-  desiredReplicas: 0
-
-  desiredReplicas: 0
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
